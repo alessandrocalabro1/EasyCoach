@@ -1,0 +1,71 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    overflow-y: auto;
+}
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.levelTag {
+    background: rgba(0, 229, 255, 0.1);
+    color: var(--color-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.goals {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.prList {
+    list-style: none;
+}
+
+.prList li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.prList li span {
+    color: var(--color-text-muted);
+}
+
+.prList li strong {
+    color: var(--color-text-main);
+    font-weight: 600;
+}
+
+.recent {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+}

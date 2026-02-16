@@ -1,0 +1,41 @@
+.container {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.wodSections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.part h3 {
+    color: var(--color-secondary);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.description {
+    font-size: 1.1rem;
+    white-space: pre-wrap;
+    margin-bottom: 1rem;
+    font-family: 'Roboto Mono', monospace;
+    /* Monospace for alignment in descriptions */
+    color: var(--color-text-main);
+}
+
+.notes {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    border-left: 3px solid var(--color-primary);
+    padding-left: 0.75rem;
+}
