@@ -5,6 +5,14 @@ export const generateInitialAnalysis = (data: AppInputData): string => {
     const isBeginner = athlete.level === 'beginner';
     const hasInjury = athlete.injuries_or_limits && athlete.injuries_or_limits.length > 0;
 
+    if (!wod.parts || wod.parts.length === 0) {
+        return "Non ho trovato un WOD valido da analizzare. Inserisci il workout per iniziare.";
+    }
+
+    // Identify types of work
+    const workTypes = wod.parts.map(p => p.type).join(', ');
+    const mainMovement = wod.parts[0]?.description.split('\n')[0] || "lavoro principale";
+
     // Basic logic to generate a "smart" response
     let scalingAdvice = "";
     if (isBeginner) {
@@ -24,41 +32,41 @@ export const generateInitialAnalysis = (data: AppInputData): string => {
     }
 
     return `
-## Sintesi WOD
-Un mix di forza pesante (${wod.parts[0].description.split(':')[0]}) e un Metcon classico a terzine. Richiede gestione del cortisolo nella prima parte e pacing costante nella seconda.
+## Analisi WOD: ${wod.title || "Workout del Giorno"}
+Questo workout include: **${workTypes}**.
+Focus principale su: *${mainMovement}*.
 
 ## Domande Flash (solo se necessarie)
-${hasInjury ? `1) Come va la schiena oggi? 1-10 dolore?` : ""}
-2) Quanto tempo hai esattamente (60 o 90 min)?
+${hasInjury ? `1) Come va il problema a: ${athlete.injuries_or_limits.join(', ')}?` : ""}
+2) Quanto tempo hai a disposizione oggi?
 
 ## Piano Coach (Bozza)
 ### 1) Warm-up
-- 5 min Row leggero
-- 3 round: 10 Air Squats, 5 Inchworms, 10 Scap Pull-ups.
-- Mobilità specifica per ${hasInjury ? "la zona lombare" : "anca e spalle"}.
+- 5 min Cardio leggero (Row/Bike/Run)
+- Mobilità specifica per i movimenti odierni.
+- Attivazione core e spalle.
 
-### 2) Technique Primer
-- Back Squat: Focus su "spezzare il parallelo" senza perdere la lordosi.
+### 2) Focus Tecnico
+- Rivedi la tecnica dei movimenti principali prima di caricare.
+- Fai delle serie di avvicinamento progressive.
 
 ### 3) Scaling
 ${scalingAdvice}
 
-### 4) Strategia & Pacing (Generale)
-- Metcon: 12 min sono lunghi. Parti al 80%.
+### 4) Strategia & Pacing
+- Gestisci le energie in modo costante. Non partire al 100%.
+- Nei set pesanti, recupera il necessario. Nei Metcon, minimizza le transizioni.
 
-### 5) Errori comuni + fix
-- Squat: Ginocchia che collassano -> Spingi in fuori i piedi.
-- Wall Ball: Palla bassa -> Mira preciso al target ogni volta.
+### 5) Note & Tips
+- Mantieni la postura corretta anche sotto fatica.
+- Respira regolarmente.
 
-### 6) Cooldown/Recovery
-- 5 min bici molto blanda.
-- Stretching flessori anca e quadricipiti.
 ${kbSection ? `\n### Note da Knowledge Base${kbSection}` : ""}
 
-## Stima Difficoltà (Provvisoria)
-- Score: ${isBeginner ? "85" : "70"}/100
+## Stima Difficoltà
+- Score Previsto: ${isBeginner ? "High" : "Medium-High"} intensity.
 
-Attendo risposte per il Piano Coach definitivo e specifico.
+Attendo conferme per il Piano definitivo.
 `.trim();
 };
 
@@ -70,31 +78,30 @@ export const generateUpdatedPlan = (_data: AppInputData, userAnswers: string): s
 
     if (isPainful) {
         finalPlan += `### ⚠️ Modifica Sicurezza:
-Ho rimosso i carichi pesanti visto il dolore segnalato. 
-- Sostituisci Back Squat pesante con Tempo Goblet Squats @3331 (molto leggeri) per attivazione senza carico spinale.
-- Nel Metcon: Wall Balls diventano Air Squats o Thruster a corpo libero se necessario.
+Ho rimosso i carichi pesanti o i movimenti impattanti visto il dolore segnalato.
+- Focus assoluto sulla qualità del movimento o sostituzione con varianti isometriche/low-impact.
     \n`;
     } else {
-        finalPlan += `### Carico confermato:
-Ottimo che non ci sia dolore. Procedi con la progressione lineare nel Back Squat.
-- Target: Cerca di aumentare 2-5kg rispetto alla settimana scorsa se la tecnica è solida.
+        finalPlan += `### Luce Verde:
+Ottimo che non ci sia dolore. Procedi come programmato.
+- Spingi sui carichi se ti senti bene, ma priorità sempre alla tecnica.
     \n`;
     }
 
     if (isShortTime) {
         finalPlan += `### ⏱️ Adattamento Tempo:
-Visto che hai ${isShortTime ? "solo 60 min" : "tempo"}, tagliamo:
-- Warm-up: 2 round invece di 3.
-- Accessory work: Rimandato alla prossima sessione.
+Visto il tempo ridotto:
+- Warm-up compatto (5-8 min).
+- Riduci i recuperi o taglia un round/set se necessario per stare nei 60 min.
     \n`;
     }
 
-    finalPlan += `### Strategia & Pacing (Aggiornata)
-1. **Squat**: ${isPainful ? "Focus puramente tecnico, 5 set x 5 reps lentissime." : "5 set salendo. Riposo 2:30 tra i set."}
-2. **Metcon**: ${isPainful ? "Lavora sulla qualità del movimento, ignorando il timer." : "Parti deciso. I primi 5 minuti al 85%, poi tieni. Le transizioni devono essere sotto i 10s."}
+    finalPlan += `### Strategia Finale
+1. **Warm-up**: Rapido ed efficace. Sudare leggermente prima di iniziare.
+2. **Main WOD**: ${isPainful ? "Lavora sulla qualità, ignorando il timer." : "Intensità controllata. Spingi nell'ultima parte."}
 
 ### Logging Finale
-Quando hai finito, clicca su "Concludi Allenamento" per salvare i dati.`; // Updated user prompt in generated plan
+Quando hai finito, clicca su "Concludi Allenamento" per salvare i dati.`;
 
     return finalPlan;
 };

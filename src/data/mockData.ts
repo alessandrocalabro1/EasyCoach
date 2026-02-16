@@ -51,53 +51,35 @@ export interface AppInputData {
   kb_snippets: KbSnippet[];
 }
 
-export const MOCK_DATA: AppInputData = {
+export const INITIAL_EMPTY_DATA: AppInputData = {
   date: new Date().toISOString().split('T')[0],
   wod: {
-    title: "Monday Grind",
-    parts: [
-      {
-        type: "strength",
-        description: "Back Squat: 5-5-3-3-3 @ 70-85%",
-        timecap_minutes: 20,
-        notes: "Focus on deep position and fast ascent."
-      },
-      {
-        type: "metcon",
-        description: "AMRAP 12 min:\n10 Wall Balls (9/6kg)\n10 Box Jumps (60/50cm)\n10 Pull-ups",
-        timecap_minutes: 12,
-        notes: null
-      }
-    ]
+    title: "",
+    parts: []
   },
   athlete: {
-    name: "Alex",
-    level: "intermediate",
-    goals: ["Increase Squat", "Improve Metcon Pacing"],
-    equipment: ["Barbell", "Rower", "Box", "Pull-up bar"],
-    injuries_or_limits: ["Mild lower back stiffness"],
-    recent_workouts_summary: "Last week: heavy deadlifts on Tue, intense cardio on Thu.",
+    name: "",
+    level: "intermediate", // Default
+    goals: [],
+    equipment: [],
+    injuries_or_limits: [],
+    recent_workouts_summary: null,
     prs: {
-      back_squat_1rm: 140,
-      front_squat_1rm: 110,
-      deadlift_1rm: 180,
-      clean_and_jerk_1rm: 95,
-      snatch_1rm: 70,
-      thruster_1rm: 85,
-      pullups_unbroken: 15,
-      muscleups_unbroken: 2,
-      row_2k: "7:15",
-      run_5k: "24:30"
+      back_squat_1rm: null,
+      front_squat_1rm: null,
+      deadlift_1rm: null,
+      clean_and_jerk_1rm: null,
+      snatch_1rm: null,
+      thruster_1rm: null,
+      pullups_unbroken: null,
+      muscleups_unbroken: null,
+      row_2k: null,
+      run_5k: null
     },
     preferences: {
-      rx_vs_scale: "rx", // Let's see if the coach suggests scaling based on "bad back"
-      session_time_minutes: 60
+      rx_vs_scale: null,
+      session_time_minutes: null
     }
   },
-  kb_snippets: [
-    {
-      source: "Coach Notes",
-      snippet: "Alex tends to round the back on heavy squats > 85%. Remind to brace core."
-    }
-  ]
+  kb_snippets: []
 };

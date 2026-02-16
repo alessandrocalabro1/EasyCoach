@@ -2,70 +2,122 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-right: 1.5rem;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
     height: 100%;
-    overflow-y: auto;
 }
 
 .card {
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1rem;
 }
 
-.card h2 {
-    font-size: 1.5rem;
-    color: var(--color-primary);
-    margin-bottom: 0.5rem;
+.avatarPlaceholder {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #3b82f6, #9333ea);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.card h3 {
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-text-muted);
-    margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
+.name {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-primary);
 }
 
 .levelTag {
-    background: rgba(0, 229, 255, 0.1);
-    color: var(--color-primary);
-    padding: 0.25rem 0.5rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.8rem;
     display: inline-block;
-    margin-bottom: 1rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 0.7rem;
     font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.goalsSection {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border);
+}
+
+.goalsSection h4 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .goals {
     font-size: 0.9rem;
-    color: var(--color-text-muted);
+    color: var(--text-primary);
+    line-height: 1.4;
 }
 
 .prList {
     list-style: none;
+    margin-top: 0.5rem;
 }
 
 .prList li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
 }
 
-.prList li span {
-    color: var(--color-text-muted);
+.prList li:last-child {
+    border-bottom: none;
 }
 
-.prList li strong {
-    color: var(--color-text-main);
-    font-weight: 600;
+.prList span {
+    color: var(--text-secondary);
+}
+
+.prList strong {
+    color: var(--text-primary);
 }
 
 .recent {
     font-size: 0.9rem;
-    line-height: 1.4;
-    color: var(--color-text-muted);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.emptyText {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+.card.warning h3 {
+    margin-bottom: 0.5rem;
+}
+
+.card.warning ul {
+    list-style-position: inside;
+    color: #fca5a5;
+    font-size: 0.9rem;
 }
